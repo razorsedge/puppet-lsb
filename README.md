@@ -1,5 +1,5 @@
-lsb Module
-===============
+Puppet lsb Module
+=================
 
 master branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-lsb.png?branch=master)](http://travis-ci.org/razorsedge/puppet-lsb)
 develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-lsb.png?branch=develop)](http://travis-ci.org/razorsedge/puppet-lsb)
@@ -7,24 +7,24 @@ develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-
 Introduction
 ------------
 
-This module ....
+This module installs Linux Standards Base support and allows facter to present the LSB facts lsbdistcodename, lsbdistdescription, lsbdistid, lsbdistrelease, lsbmajdistrelease, and lsbrelease.
 
 Actions:
 
-* None
+* Installs the LSB package.
 
 OS Support:
 
 * RedHat family - tested on CentOS 5.5+ and CentOS 6.2+
-* SuSE family   - presently unsupported (patches welcome)
-* Debian family - presently unsupported (patches welcome)
+* SuSE family   - should work
+* Debian family - should work
 
 Class documentation is available via puppetdoc.
 
 Examples
 --------
 
-    include 'lsb'
+    class { 'lsb': }
 
 
 Notes

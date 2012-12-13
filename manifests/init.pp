@@ -4,28 +4,28 @@
 #
 # === Parameters:
 #
-# Document parameters here.
+# [*ensure*]
+#   Ensure if present or absent.
+#   Default: present
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*autoupgrade*]
+#   Upgrade package automatically, if there is a newer version.
+#   Default: false
 #
-# === Variables:
+# [*package_name*]
+#   Name of the package.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
 #
-# Here you should define a list of variables that this module would require.
+# === Actions:
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if it
-#   has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should not be used in preference to class parameters  as of
-#   Puppet 2.6.)
+# Installs the lsb package.
 #
 # === Sample Usage:
 #
-#  class { lsb:
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ]
-#  }
+#  # default client
+#  class { 'lsb': }
 #
 # === Authors:
 #
@@ -35,7 +35,32 @@
 #
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
-class lsb {
+class lsb (
+  $ensure       = $lsb::params::ensure,
+  $autoupgrade  = $lsb::params::safe_autoupgrade,
+  $package_name = $lsb::params::package_name
+) inherits lsb::params {
+  # Validate our booleans
+  validate_bool($autoupgrade)
 
+  case $ensure {
+    /(present)/: {
+      if $autoupgrade == true {
+        $package_ensure = 'latest'
+      } else {
+        $package_ensure = 'present'
+      }
+    }
+    /(absent)/: {
+      $package_ensure = 'absent'
+    }
+    default: {
+      fail('ensure parameter must be present or absent')
+    }
+  }
 
+  package { 'lsb':
+    ensure  => $package_ensure,
+    name    => $package_name,
+  }
 }

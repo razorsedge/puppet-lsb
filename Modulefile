@@ -1,11 +1,11 @@
 name    'razorsedge-lsb'
 version '0.0.1'
-source 'UNKNOWN'
+source 'git://github.com/razorsedge/puppet-lsb.git'
 author 'razorsedge'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
+summary 'Puppet module to install Linux Standards Base support.'
 description 'UNKNOWN'
-project_page 'UNKNOWN'
+project_page 'https://github.com/razorsedge/puppet-lsb'
 
 ## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+dependency 'puppetlabs/stdlib', '>=2.1.0'
