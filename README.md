@@ -1,5 +1,5 @@
-Puppet lsb Module
-=================
+Puppet Linux Standards Base Module
+==================================
 
 master branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-lsb.png?branch=master)](http://travis-ci.org/razorsedge/puppet-lsb)
 develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-lsb.png?branch=develop)](http://travis-ci.org/razorsedge/puppet-lsb)
