@@ -7,7 +7,7 @@ develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-
 Introduction
 ------------
 
-This module installs Linux Standards Base support and allows facter to present the LSB facts lsbdistcodename, lsbdistdescription, lsbdistid, lsbdistrelease, lsbmajdistrelease, and lsbrelease.
+This module installs minimal Linux Standards Base (LSB) support to allow facter to present the LSB facts lsbdistcodename, lsbdistdescription, lsbdistid, lsbdistrelease, lsbmajdistrelease, and lsbrelease.  It can also install full LSB support if required.
 
 Actions:
 
@@ -24,7 +24,15 @@ Class documentation is available via puppetdoc.
 Examples
 --------
 
+Install minimal LSB support for facter facts:
+
     class { 'lsb': }
+
+Install full LSB support:
+
+    class { 'lsb':
+      install_full_lsb_support => true,
+    }
 
 
 Notes
