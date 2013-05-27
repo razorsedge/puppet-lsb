@@ -25,9 +25,11 @@ Examples
 --------
 
 Install minimal LSB support for facter facts:
+
     class { 'lsb': }
 
 Install full LSB support:
+
     class { 'lsb':
       install_full_lsb_support => true,
     }
