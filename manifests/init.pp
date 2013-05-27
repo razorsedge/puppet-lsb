@@ -1,6 +1,8 @@
 # == Class: lsb
 #
-# Full description of class lsb here.
+# This module installs minimal Linux Standards Base support and allows facter to
+# present the LSB facts lsbdistcodename, lsbdistdescription, lsbdistid,
+# lsbdistrelease, lsbmajdistrelease, and lsbrelease.
 #
 # === Parameters:
 #
@@ -13,10 +15,21 @@
 #   Default: false
 #
 # [*package_name*]
-#   Name of the package.
+#   Name of the minimal package.
 #   Only set this if your platform is not supported or you know what you are
 #   doing.
 #   Default: auto-set, platform specific
+#
+# [*package_name_full*]
+#   Name of the full package.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
+#
+# [*install_full_lsb_support*]
+#   Whether to use just the minimal LSB packaging if it is available. Otherwise
+#   the full LSB software and dependencies will be installed.
+#   Default: true
 #
 # === Actions:
 #
@@ -36,12 +49,15 @@
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
 class lsb (
-  $ensure       = $lsb::params::ensure,
-  $autoupgrade  = $lsb::params::safe_autoupgrade,
-  $package_name = $lsb::params::package_name
+  $ensure                   = $lsb::params::ensure,
+  $autoupgrade              = $lsb::params::safe_autoupgrade,
+  $package_name             = $lsb::params::package_name,
+  $package_name_full        = $lsb::params::package_name_full,
+  $install_full_lsb_support = $lsb::params::safe_install_full_lsb_support
 ) inherits lsb::params {
   # Validate our booleans
   validate_bool($autoupgrade)
+  validate_bool($install_full_lsb_support)
 
   case $ensure {
     /(present)/: {
@@ -59,8 +75,15 @@ class lsb (
     }
   }
 
-  package { 'lsb':
-    ensure  => $package_ensure,
-    name    => $package_name,
+  if $install_full_lsb_support {
+    package { 'lsb':
+      ensure  => $package_ensure,
+      name    => $package_name_full,
+    }
+  } else {
+    package { 'lsb':
+      ensure  => $package_ensure,
+      name    => $package_name,
+    }
   }
 }

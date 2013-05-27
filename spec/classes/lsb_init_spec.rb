@@ -19,11 +19,80 @@ describe 'lsb', :type => 'class' do
 
   context 'on a supported operatingsystem, default parameters' do
     let(:params) {{}}
-    let :facts do {
-      :osfamily => 'RedHat'
-    }
+
+    describe 'RedHat 5' do
+      let :facts do {
+        :osfamily                  => 'RedHat',
+        :operatingsystem           => 'RedHat',
+        :operatingsystemmajrelease => '5'
+      }
+      end
+      it { should contain_package('lsb').with(
+        :ensure => 'present',
+        :name   => 'redhat-lsb'
+      )}
     end
-    it { should contain_package('lsb').with_ensure('present') }
+
+    describe 'RedHat 6' do
+      let :facts do {
+        :osfamily                  => 'RedHat',
+        :operatingsystem           => 'RedHat',
+        :operatingsystemmajrelease => '6'
+      }
+      end
+      it { should contain_package('lsb').with(
+        :ensure => 'present',
+        :name   => 'redhat-lsb-core'
+      )}
+    end
+
+    describe 'Fedora 16' do
+      let :facts do {
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'Fedora',
+        :operatingsystemrelease => '16'
+      }
+      end
+      it { should contain_package('lsb').with(
+        :ensure => 'present',
+        :name   => 'redhat-lsb'
+      )}
+    end
+
+    describe 'Fedora 17' do
+      let :facts do {
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'Fedora',
+        :operatingsystemrelease => '17'
+      }
+      end
+      it { should contain_package('lsb').with(
+        :ensure => 'present',
+        :name   => 'redhat-lsb-core'
+      )}
+    end
+
+    describe 'osfamily Debian' do
+      let :facts do {
+        :osfamily => 'Debian'
+      }
+      end
+      it { should contain_package('lsb').with(
+        :ensure => 'present',
+        :name   => 'lsb-release'
+      )}
+    end
+
+    describe 'osfamily Suse' do
+      let :facts do {
+        :osfamily => 'Suse'
+      }
+      end
+      it { should contain_package('lsb').with(
+        :ensure => 'present',
+        :name   => 'lsb-release'
+      )}
+    end
   end
 
   context 'on a supported operatingsystem, custom parameters' do
@@ -46,6 +115,46 @@ describe 'lsb', :type => 'class' do
       }
       end
       it { should contain_package('lsb').with_ensure('latest') }
+    end
+  end
+
+  context 'on a supported operatingsystem, custom parameters, install_full_lsb_support => true' do
+    let :params do {
+      :install_full_lsb_support => true
+    }
+    end
+
+    describe 'osfamily RedHat' do
+      let :facts do {
+        :osfamily => 'RedHat'
+      }
+      end
+      it { should contain_package('lsb').with(
+        :ensure => 'present',
+        :name   => 'redhat-lsb'
+      )}
+    end
+
+    describe 'osfamily Debian' do
+      let :facts do {
+        :osfamily => 'Debian'
+      }
+      end
+      it { should contain_package('lsb').with(
+        :ensure => 'present',
+        :name   => 'lsb'
+      )}
+    end
+
+    describe 'osfamily Suse' do
+      let :facts do {
+        :osfamily => 'Suse'
+      }
+      end
+      it { should contain_package('lsb').with(
+        :ensure => 'present',
+        :name   => 'lsb'
+      )}
     end
   end
 
