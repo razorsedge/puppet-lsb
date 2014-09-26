@@ -1,0 +1,57 @@
+{
+  "name": "razorsedge-lsb",
+  "version": "1.1.0",
+  "author": "razorsedge",
+  "summary": "Linux Standards Base software installation.",
+  "license": "Apache License, Version 2.0",
+  "project_page": "https://github.com/razorsedge/puppet-lsb",
+  "issues_url": "https://github.com/razorsedge/puppet-lsb/issues",
+  "source": "https://github.com/razorsedge/puppet-lsb.git",
+  "tags": [ "RHEL", "rhel", "OEL", "CentOS", "LSB", "SuSE", "SLES", "OpenSUSE", "debian", "ubuntu" ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">=2.2.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [ "5", "6", "7" ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [ "5", "6", "7" ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [ "5", "6", "7" ]
+    },
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [ "18", "19", "20" ]
+    },
+    {
+      "operatingsystem": "SuSE",
+      "operatingsystemrelease": [ ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [ "6", "7" ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [ "10.04", "12.04" ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": ">=2.7.20 <4.0.0"
+    }
+  ]
+}
