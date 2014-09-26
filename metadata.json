@@ -1,6 +1,6 @@
 {
   "name": "razorsedge-lsb",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "razorsedge",
   "summary": "Linux Standards Base software installation.",
   "license": "Apache License, Version 2.0",
