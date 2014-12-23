@@ -82,13 +82,13 @@ class lsb (
 
   if $install_full_lsb_support {
     package { 'lsb':
-      ensure  => $package_ensure,
-      name    => $package_name_full,
+      ensure => $package_ensure,
+      name   => $package_name_full,
     }
   } else {
     package { 'lsb':
-      ensure  => $package_ensure,
-      name    => $package_name,
+      ensure => $package_ensure,
+      name   => $package_name,
     }
   }
 }
