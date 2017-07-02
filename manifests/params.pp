@@ -15,16 +15,20 @@
 #
 class lsb::params {
 ### The following parameters should not need to be changed.
-  $ensure = $::lsb_ensure ? {
-    undef   => 'present',
-    default => $::lsb_ensure,
+  $lsb_ensure = getvar('::lsb_ensure')
+  if $lsb_ensure {
+    $ensure = $::lsb_ensure
+  } else {
+    $ensure = 'present'
   }
 
   # Since the top scope variable could be a string (if from an ENC), we might
   # need to convert it to a boolean.
-  $autoupgrade = $::lsb_autoupgrade ? {
-    undef   => false,
-    default => $::lsb_autoupgrade,
+  $lsb_autoupgrade = getvar('::lsb_autoupgrade')
+  if $lsb_autoupgrade {
+    $autoupgrade = $::lsb_autoupgrade
+  } else {
+    $autoupgrade = false
   }
   if is_string($autoupgrade) {
     $safe_autoupgrade = str2bool($autoupgrade)
@@ -32,9 +36,11 @@ class lsb::params {
     $safe_autoupgrade = $autoupgrade
   }
 
-  $install_full_lsb_support = $::lsb_install_full_lsb_support ? {
-    undef   => false,
-    default => $::lsb_install_full_lsb_support,
+  $lsb_install_full_lsb_support = getvar('::lsb_install_full_lsb_support')
+  if $lsb_install_full_lsb_support {
+    $install_full_lsb_support = $::lsb_install_full_lsb_support
+  } else {
+    $install_full_lsb_support = false
   }
   if is_string($install_full_lsb_support) {
     $safe_install_full_lsb_support = str2bool($install_full_lsb_support)
@@ -52,8 +58,11 @@ class lsb::params {
     $majdistrelease = regsubst($::operatingsystemrelease,'^(\d+)\.(\d+)','\1')
   }
 
-  $package_name = $::lsb_package_name ? {
-    undef   => $::osfamily ? {
+  $lsb_package_name = getvar('::lsb_package_name')
+  if $lsb_package_name {
+    $package_name = $::lsb_package_name
+  } else {
+    $package_name = $::osfamily ? {
       # Use the minimal redhat-lsb-core package on systems on which it is
       # provided.
       'RedHat' => $::operatingsystem ? {
@@ -71,18 +80,19 @@ class lsb::params {
       'Debian' => 'lsb-release',
       'Suse'   => 'lsb-release',
       default  => undef,
-    },
-    default => $::lsb_package_name,
+    }
   }
 
-  $package_name_full = $::lsb_package_name_full ? {
-    undef   => $::osfamily ? {
+  $lsb_package_name_full = getvar('::lsb_package_name_full')
+  if $lsb_package_name_full {
+    $package_name_full = $::lsb_package_name_full
+  } else {
+    $package_name_full = $::osfamily ? {
       'RedHat' => 'redhat-lsb',
       'Debian' => 'lsb',
       'Suse'   => 'lsb',
       default  => undef,
-    },
-    default => $::lsb_package_name_full,
+    }
   }
 
   case $::osfamily {
