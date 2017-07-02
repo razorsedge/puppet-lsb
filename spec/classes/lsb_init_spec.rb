@@ -6,8 +6,10 @@ describe 'lsb', :type => 'class' do
 
   context 'on a non-supported operatingsystem' do
     let :facts do {
-      :osfamily        => 'foo',
-      :operatingsystem => 'bar'
+      :osfamily               => 'foo',
+      :operatingsystem        => 'bar',
+      :operatingsystemrelease => '1',
+      :operatingsystemmajrelease => '1'
     }
     end
     it 'should fail' do
@@ -50,7 +52,8 @@ describe 'lsb', :type => 'class' do
       let :facts do {
         :osfamily               => 'RedHat',
         :operatingsystem        => 'Fedora',
-        :operatingsystemrelease => '16'
+        :operatingsystemrelease => '16',
+        :operatingsystemmajrelease => '16'
       }
       end
       it { should contain_package('lsb').with(
@@ -63,7 +66,8 @@ describe 'lsb', :type => 'class' do
       let :facts do {
         :osfamily               => 'RedHat',
         :operatingsystem        => 'Fedora',
-        :operatingsystemrelease => '17'
+        :operatingsystemrelease => '17',
+        :operatingsystemmajrelease => '17'
       }
       end
       it { should contain_package('lsb').with(
@@ -74,7 +78,10 @@ describe 'lsb', :type => 'class' do
 
     describe 'osfamily Debian' do
       let :facts do {
-        :osfamily => 'Debian'
+        :osfamily               => 'Debian',
+        :operatingsystem        => 'Debian',
+        :operatingsystemrelease => '1',
+        :operatingsystemmajrelease => '1'
       }
       end
       it { should contain_package('lsb').with(
@@ -85,7 +92,10 @@ describe 'lsb', :type => 'class' do
 
     describe 'osfamily Suse' do
       let :facts do {
-        :osfamily => 'Suse'
+        :osfamily               => 'Suse',
+        :operatingsystem        => 'Suse',
+        :operatingsystemrelease => '1',
+        :operatingsystemmajrelease => '1'
       }
       end
       it { should contain_package('lsb').with(
@@ -97,7 +107,10 @@ describe 'lsb', :type => 'class' do
 
   context 'on a supported operatingsystem, custom parameters' do
     let :facts do {
-      :osfamily => 'RedHat'
+      :osfamily               => 'RedHat',
+      :operatingsystem        => 'RedHat',
+      :operatingsystemrelease => '1',
+      :operatingsystemmajrelease => '1'
     }
     end
 
@@ -126,7 +139,10 @@ describe 'lsb', :type => 'class' do
 
     describe 'osfamily RedHat' do
       let :facts do {
-        :osfamily => 'RedHat'
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'RedHat',
+        :operatingsystemrelease => '1',
+        :operatingsystemmajrelease => '1'
       }
       end
       it { should contain_package('lsb').with(
@@ -137,7 +153,10 @@ describe 'lsb', :type => 'class' do
 
     describe 'osfamily Debian' do
       let :facts do {
-        :osfamily => 'Debian'
+        :osfamily               => 'Debian',
+        :operatingsystem        => 'Debian',
+        :operatingsystemrelease => '1',
+        :operatingsystemmajrelease => '1'
       }
       end
       it { should contain_package('lsb').with(
@@ -148,7 +167,10 @@ describe 'lsb', :type => 'class' do
 
     describe 'osfamily Suse' do
       let :facts do {
-        :osfamily => 'Suse'
+        :osfamily               => 'Suse',
+        :operatingsystem        => 'Suse',
+        :operatingsystemrelease => '1',
+        :operatingsystemmajrelease => '1'
       }
       end
       it { should contain_package('lsb').with(
