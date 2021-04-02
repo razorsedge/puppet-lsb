@@ -54,15 +54,12 @@
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
 class lsb (
-  $ensure                   = $lsb::params::ensure,
-  $autoupgrade              = $lsb::params::safe_autoupgrade,
-  $package_name             = $lsb::params::package_name,
-  $package_name_full        = $lsb::params::package_name_full,
-  $install_full_lsb_support = $lsb::params::safe_install_full_lsb_support
+  String   $ensure                   = $lsb::params::ensure,
+  Boolean  $autoupgrade              = $lsb::params::safe_autoupgrade,
+  String   $package_name             = $lsb::params::package_name,
+  String   $package_name_full        = $lsb::params::package_name_full,
+  Boolean  $install_full_lsb_support = $lsb::params::safe_install_full_lsb_support
 ) inherits lsb::params {
-  # Validate our booleans
-  validate_bool($autoupgrade)
-  validate_bool($install_full_lsb_support)
 
   case $ensure {
     /(present)/: {
